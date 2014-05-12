@@ -1,9 +1,9 @@
 <?php 
 
-
 //define high and low variable values
-$lownum = 1;
-$highnum = 100;
+// in this version the values are input via argv values in the terminal
+$lownum = $argv[1];
+$highnum = $argv[2];
 
 //have comp generate a random number
 $comp_pick = rand ($lownum, $highnum);
@@ -15,13 +15,10 @@ $attempts = 0;
 fwrite(STDOUT, "Guess a number between $lownum & $highnum!");
 
 
-
-
-
-
 do {
-	// Get the input from user
+	// Get the input from user, placed before comparion to avoid repition
 	$guess = fgets(STDIN);
+	//increment attempts counter, placed before comparison to avoid repition
 	$attempts++;
 
 	if ($guess < $comp_pick) {
@@ -32,13 +29,11 @@ do {
         echo "Lower\n";
         fwrite(STDOUT, 'Guess again? ');
         }
-} while ($guess != $comp_pick);
-
-if($attempts > 5){
+    elseif($attempts > 5){
 	echo "Took you long enough! ($attempts attempts)\n";
-}	else {
-		echo "Great guess, you are correct! ($attempts attempts)\n";
-	}
-
+	}	else {
+			echo "Great guess, you are correct! ($attempts attempts)\n";
+		}
+} while ($guess != $comp_pick);
 
  ?>
