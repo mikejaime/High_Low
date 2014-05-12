@@ -1,25 +1,44 @@
 <?php 
 
-/*
-// Write the output
-// Notice the space after the ?
-fwrite(STDOUT, 'What is your first name? ');
 
-// Get the input from user
-$first_name = fgets(STDIN);
+//define high and low variable values
+$lownum = 1;
+$highnum = 100;
 
-// Output the user's name
-fwrite(STDOUT, "Hello $first_name\n");
-*/
+//have comp generate a random number
+$comp_pick = rand ($lownum, $highnum);
+
+//attempts counter
+$attempts = 0;
+
+//user prompted to guess a number
+fwrite(STDOUT, "Guess a number between $lownum & $highnum!");
 
 
-/*
-The specs for the game are:
-- game picks a random number between 1 and 100.
-- prompts user to guess the number
-- if user's guess is less than the number, it outputs "HIGHER"
-- if user's guess is more than the number, it outputs "LOWER"
-- if a user guesses the number, the game should declare "GOOD GUESS!"
-*/
+
+
+
+
+do {
+	// Get the input from user
+	$guess = fgets(STDIN);
+	$attempts++;
+
+	if ($guess < $comp_pick) {
+        echo "Higher\n";
+        fwrite(STDOUT, 'Guess again? ');
+        }
+	elseif ($guess > $comp_pick) {
+        echo "Lower\n";
+        fwrite(STDOUT, 'Guess again? ');
+        }
+} while ($guess != $comp_pick);
+
+if($attempts > 5){
+	echo "Took you long enough! ($attempts attempts)\n";
+}	else {
+		echo "Great guess, you are correct! ($attempts attempts)\n";
+	}
+
 
  ?>
